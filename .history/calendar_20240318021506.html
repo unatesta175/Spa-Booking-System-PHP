@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>#calendar {
+    display: none;
+    position: absolute;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  .date {
+    cursor: pointer;
+  }
+  
+  .date:hover {
+    background-color: #f0f0f0;
+  }</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date Picker</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <input type="text" id="datepicker" readonly>
+  <div id="calendar"></div>
+
+  <script src="script.js">document.addEventListener("DOMContentLoaded", function() {
+    var datePickerInput = document.getElementById("datepicker");
+    var calendarDiv = document.getElementById("calendar");
+  
+    // Create calendar
+    function createCalendar(year, month) {
+      var daysInMonth = new Date(year, month + 1, 0).getDate();
+      var firstDayOfMonth = new Date(year, month, 1).getDay();
+  
+      // Clear previous calendar
+      calendarDiv.innerHTML = "";
+  
+      // Create dates
+      for (var i = 1; i <= daysInMonth; i++) {
+        var dateDiv = document.createElement("div");
+        dateDiv.classList.add("date");
+        dateDiv.textContent = i;
+        dateDiv.setAttribute("data-date", year + "-" + (month + 1) + "-" + i);
+        dateDiv.addEventListener("click", function() {
+          var selectedDate = this.getAttribute("data-date");
+          datePickerInput.value = selectedDate;
+          calendarDiv.style.display = "none";
+        });
+        calendarDiv.appendChild(dateDiv);
+      }
+    }
+  
+    // Show calendar when input is clicked
+    datePickerInput.addEventListener("click", function() {
+      var today = new Date();
+      var year = today.getFullYear();
+      var month = today.getMonth();
+      createCalendar(year, month);
+      calendarDiv.style.display = "block";
+    });
+  
+    // Hide calendar when user clicks outside
+    document.addEventListener("click", function(event) {
+      if (event.target != datePickerInput && event.target.closest("#calendar") == null) {
+        calendarDiv.style.display = "none";
+      }
+    });
+  });</script>
+</body>
+</html>

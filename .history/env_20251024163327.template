@@ -1,0 +1,14 @@
+# ToyyibPay API Configuration
+TOYYIBPAY_SECRET_KEY=m8zfj65c-2fzo-gq3b-rwhw-xvneusqy7wuy
+TOYYIBPAY_CATEGORY_CODE=2n8qqo61
+
+# Database Configuration (if needed)
+# DB_HOST=localhost
+# DB_NAME=your_database_name
+# DB_USER=root
+# DB_PASS=
+
+# Application Settings
+# APP_ENV=development
+# APP_DEBUG=true
+

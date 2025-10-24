@@ -1,0 +1,155 @@
+.fc .fc-popover-title {
+  font-size: 1.3rem !important;
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-end,
+.fc-direction-rtl .fc-daygrid-event.fc-event-start {
+  font-size: 1.3rem !important;
+}
+
+.fc-direction-ltr .fc-daygrid-more-link {
+  text-decoration: none !important;
+  color: rgb(141 149 168) !important;
+  font-family: "Gilroymedium", sans-serif;
+}
+
+.fc-direction-ltr .fc-list-day-side-text,
+.fc-direction-rtl .fc-list-day-text {
+  text-decoration: none !important;
+  font-family: "Gilroymedium", sans-serif;
+  color: rgb(141 149 168) !important;
+}
+
+.fc-daygrid-dot-event .fc-event-title {
+  color: rgb(141 149 168) !important;
+}
+
+.fc-direction-ltr .fc-daygrid-event .fc-event-time {
+  color: rgb(141 149 168) !important;
+}
+
+.fc-daygrid-event-dot {
+  border: calc(var(--fc-daygrid-event-dot-width) / 2) solid #519fff !important;
+}
+.fc-daygrid-day-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fc .fc-daygrid-day-number {
+  padding: 4px;
+  position: relative;
+  z-index: 4;
+  text-decoration: none;
+  width: 100%;
+  color: rgb(141 149 168);
+}
+
+.fc-list-day-text {
+  color: rgb(141 149 168);
+  text-decoration: none;
+}
+
+/* no need this
+.fc .fc-timegrid-axis-cushion,
+.fc .fc-timegrid-slot-label-cushion {
+   padding: 0px 4px !important;
+   height: 6rem !important;
+} */
+
+.fc-timegrid-col-events {
+  width: 100% !important;
+  color: rgb(141 149 168);
+}
+
+.fc-timegrid-event,
+.fc-timegrid-more-link {
+  border-radius: 0px;
+  font-size: 2rem !important;
+
+  height: 100%;
+}
+
+/* .fc-event-title-container,
+.fc-event-time {
+   text-align: center !important;
+} */
+.fc-timegrid-event .fc-event-time {
+  font-size: 1.5rem !important;
+}
+.fc-timegrid-slot {
+  cursor: pointer;
+}
+
+.fc-scrollgrid-sync-inner {
+  border-color: #f75196 !important;
+}
+
+#calendar .fc-daygrid-day:hover {
+  background-color: lightblue;
+  /* Change background color on hover */
+}
+
+/* Minimalist styling for FullCalendar */
+
+.fc-timegrid-slot:hover {
+  background-color: lightblue;
+}
+
+.fc .fc-col-header-cell-cushion {
+  display: inline-block;
+  padding: 2px 4px;
+  text-decoration: none;
+  color: rgb(141 149 168);
+}
+
+.fc .fc-daygrid-day-number {
+  padding: 4px;
+  position: relative;
+  z-index: 4;
+  text-decoration: none;
+}
+
+.fc table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  font-size: 1.5rem;
+}
+
+/* Responsive styling */
+
+@media screen and (max-width: 768px) {
+  .fc-daygrid-day-content {
+    flex-direction: column;
+  }
+
+  .fc .fc-daygrid-day-number {
+    width: 100%;
+  }
+
+  .fc table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .fc table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    font-size: 0.7rem;
+  }
+
+  .fc-header-toolbar, /* Header buttons */
+        .fc-daygrid-day-number /* Day number in dayGridMonth view */ {
+  font-size: .5rem !important; /* Adjust font size as needed */
+}
+}
+
+.fc-header-toolbar, /* Header buttons */
+        .fc-daygrid-day-number /* Day number in dayGridMonth view */ {
+  font-size: 1.5rem; /* Adjust font size as needed */
+}

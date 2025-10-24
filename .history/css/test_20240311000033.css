@@ -1,0 +1,59 @@
+
+.other-bg {
+    background: url('../images/spa-bg.png') no-repeat center/cover; /* Shorthand for setting background properties */
+     /* Create the parallax scrolling effect */
+     
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
+     height: 94vh;
+     
+  }
+ 
+ .other-bg .other .slide{
+    animation: fadeInUp 1s ease-in-out 0s 1 normal forwards; /* Apply the fadeIn animation */
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap:1.5rem;
+    padding-bottom: 6rem;
+    padding-top: 2rem;
+    user-select: none;
+ }
+ 
+ .other-bg .other .slide .image{
+    flex:1 1 40rem;
+   
+ }
+ 
+ .other-bg .other .slide .image img{
+    height: 40rem;
+    width: 100%;
+    object-fit: contain;
+ }
+ 
+ .other-bg .other .slide .content{
+    flex:1 1 40rem;
+    
+ }
+ 
+ .other-bg .other .slide .content span{
+    
+    font-size: 3rem;
+    color:var(--white);
+ }
+ 
+ .other-bg .other .slide .content h3{
+    margin-top: 15rem;
+    font-size: 8rem;
+    color:var(--white);
+    text-transform: capitalize;
+    font-weight: bold;
+ }
+ 
+ .other-bg .other .slide .content .btn{
+    display: inline-block;
+    width: auto;
+    margin-top: 5rem;
+    font-size: 2rem;
+ }

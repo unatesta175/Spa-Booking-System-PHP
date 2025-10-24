@@ -1,0 +1,48 @@
+# Environment files - NEVER COMMIT THESE!
+.env
+.env.local
+.env.*.local
+
+# Keep templates for sharing
+!env.template
+!env.example.template
+
+# Uploaded files (optional - uncomment if needed)
+# uploaded_img/*
+# !uploaded_img/.gitkeep
+
+# Cache and temporary files
+*.log
+*.tmp
+*.cache
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Composer
+vendor/
+composer.lock
+
+# Node modules (if using npm/yarn)
+node_modules/
+
+# Database backups
+*.sql
+*.sql.gz
+*.sql.zip
+*.db
+*.sqlite
+
+# PHP cache
+opcache/
+*.opcache
+

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple JavaScript Calendar</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .fc-toolbar,
+      .fc-day-header {
+        background-color: #2e86c1; /* Change toolbar and day header background color */
+        color: #fff; /* Change text color for toolbar and day header */
+      }
+
+      .fc-day {
+        padding: 10px;
+        text-align: center; /* Center align text in day cells */
+        position: relative; /* Set position to relative for absolute positioning of hover effect */
+        cursor: pointer; /* Change cursor to pointer on hover */
+      }
+
+      .fc-day:hover {
+        background-color: rgba(0, 0, 0, 0.1); /* Add gray hover effect */
+        border-radius: 50%; /* Circle effect on hover */
+      }
+
+      .fc-day.fc-day-selected,
+      .fc-day.fc-day-clicked {
+        background-color: #3498db; /* Selected effect */
+        color: #fff; /* Text color for selected day */
+        border-radius: 50%; /* Circle effect on selected day */
+      }
+
+      .fc-today:hover {
+        background-color: #3498db; /* Hover effect for today's date */
+        border-radius: 50%; /* Circle effect on hover */
+      }
+
+      .fc-today.fc-day-selected {
+        background-color: #2e86c1; /* Selected effect for today's date */
+        border-radius: 50%; /* Circle effect on selected day */
+      }
+
+      .fc-other-month {
+        color: #ccc; /* Dim dates from other months */
+      }
+
+      .navigation {
+        margin-bottom: 20px;
+      }
+
+      #calendar-container {
+        display: flex; /* Use flexbox for container */
+        justify-content: center; /* Center align items horizontally */
+      }
+
+      #calendar {
+        max-width: 800px; /* Set maximum width for the calendar */
+        width: 100%; /* Occupy full width of container */
+        background-color: #fff; /* Set background color for the calendar */
+        border-radius: 10px; /* Add border radius for a modern look */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+        overflow: hidden; /* Hide overflowing content */
+      }
+
+      h1 {
+        text-align: center; /* Center align heading */
+        color: #2e86c1; /* Set heading color */
+      }
+
+      /* Add flexbox styles to make fc-daygrid-body flex */
+      .fc-view-container {
+        display: flex;
+        justify-content: center;
+      }
+
+   
+
+      /* Style for the navigation buttons */
+      .navigation button {
+        margin: 0 5px; /* Add margin between buttons */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Simple JavaScript Calendar</h1>
+
+    <div class="navigation">
+      <button onclick="previousMonth()">Previous Month</button>
+      <button onclick="nextMonth()">Next Month</button>
+      <button onclick="previousYear()">Previous Year</button>
+      <button onclick="nextYear()">Next Year</button>
+      <button onclick="displayToday()">Today</button>
+    </div>
+
+    <div id="calendar"></div>
+
+    <script>
+      var currentYear, currentMonth;
+
+      // Function to generate the calendar
+      function generateCalendar(year, month) {
+        var firstDay = new Date(year, month, 1);
+        var lastDay = new Date(year, month + 1, 0);
+        var numOfDays = lastDay.getDate();
+        var startingDay = firstDay.getDay(); // Index of the first day of the month (0 - Sunday, 1 - Monday, etc.)
+
+        var calendarHtml = '<div id="calendar" class="fc fc-unthemed fc-ltr">';
+        calendarHtml +=
+          '<div class="fc-toolbar"><div class="fc-left"></div><div class="fc-center">' +
+          firstDay.toLocaleString("default", { month: "long" }) +
+          " " +
+          year +
+          '</div><div class="fc-right"></div></div>';
+        calendarHtml +=
+          '<div class="fc-view-container"><table style=""width:100%; class="fc-daygrid-body"><tbody>';
+
+        // Generate blank cells for days before the start of the month
+        calendarHtml += "<tr>";
+        for (var i = 0; i < startingDay; i++) {
+          calendarHtml += '<td class="fc-day fc-day-other"></td>';
+        }
+
+        // Generate cells for each day of the month
+        var currentDay = 1;
+        for (var i = startingDay; i < 7; i++) {
+          calendarHtml += '<td class="fc-day">' + currentDay + "</td>";
+          currentDay++;
+        }
+        calendarHtml += "</tr>";
+
+        // Generate remaining rows and cells
+        while (currentDay <= numOfDays) {
+          calendarHtml += "<tr>";
+          for (var i = 0; i < 7 && currentDay <= numOfDays; i++) {
+            var date = new Date(year, month, currentDay);
+            var classNames =
+              date.toDateString() === new Date().toDateString()
+                ? "fc-day fc-day-today"
+                : "fc-day";
+            calendarHtml +=
+              '<td class="' + classNames + '">' + currentDay + "</td>";
+            currentDay++;
+          }
+          calendarHtml += "</tr>";
+        }
+
+        calendarHtml += "</tbody></table></div></div>";
+        return calendarHtml;
+      }
+
+      // Display the calendar in the specified element
+      function displayCalendar(year, month, elementId) {
+        var calendarHtml = generateCalendar(year, month);
+        document.getElementById(elementId).innerHTML = calendarHtml;
+      }
+
+      // Functions for navigation
+      function previousMonth() {
+        currentMonth--;
+        if (currentMonth < 0) {
+          currentMonth = 11;
+          currentYear--;
+        }
+        displayCalendar(currentYear, currentMonth, "calendar");
+      }
+
+      function nextMonth() {
+        currentMonth++;
+        if (currentMonth > 11) {
+          currentMonth = 0;
+          currentYear++;
+        }
+        displayCalendar(currentYear, currentMonth, "calendar");
+      }
+
+      function previousYear() {
+        currentYear--;
+        displayCalendar(currentYear, currentMonth, "calendar");
+      }
+
+      function nextYear() {
+        currentYear++;
+        displayCalendar(currentYear, currentMonth, "calendar");
+      }
+
+      // Function to display the current month with today's date highlighted
+      function displayToday() {
+        var today = new Date();
+        currentYear = today.getFullYear();
+        currentMonth = today.getMonth();
+        displayCalendar(currentYear, currentMonth, "calendar");
+      }
+
+      // Handle click on day
+      document.addEventListener("click", function(event) {
+        var target = event.target;
+        if (target.classList.contains("fc-day")) {
+          var clickedDay = target;
+          var selectedDays = document.querySelectorAll(".fc-day-clicked");
+          selectedDays.forEach(function(day) {
+            day.classList.remove("fc-day-clicked");
+          });
+          clickedDay.classList.add("fc-day-clicked");
+        }
+      });
+
+      // Initial display of the current month's calendar
+      var currentDate = new Date();
+      currentYear = currentDate.getFullYear();
+      currentMonth = currentDate.getMonth();
+      displayCalendar(currentYear, currentMonth, "calendar");
+    </script>
+  </body>
+</html>

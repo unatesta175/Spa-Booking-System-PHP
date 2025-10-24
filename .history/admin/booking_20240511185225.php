@@ -1,0 +1,231 @@
+<?php
+
+include '../components/connect.php';
+
+session_start();
+
+$admin_id = $_SESSION['admin_id'];
+
+if (!isset($admin_id)) {
+    header('location:admin-login.php');
+}
+
+
+if (isset($_POST['submit'])) {
+
+    $name = $_POST['name'];
+    $name = mb_convert_case($name, MB_CASE_TITLE, "UTF-8");
+    $name = filter_var($name, FILTER_SANITIZE_STRING);
+
+    $username = $_POST['username'];
+    $username = mb_convert_case($username, MB_CASE_TITLE, "UTF-8");
+    $username = filter_var($username, FILTER_SANITIZE_STRING);
+
+    $email = $_POST['email'];
+    $email = filter_var($email, FILTER_SANITIZE_STRING);
+    $pass = ($_POST['pass']);
+    $pass = filter_var($pass, FILTER_SANITIZE_STRING);
+    $cpass = ($_POST['cpass']);
+    $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
+
+    date_default_timezone_set('Asia/Kuala_Lumpur');
+    $currentDateTime = date('Y-m-d H:i:s');
+
+    $select_admin = $conn->prepare("SELECT * FROM `admins` WHERE name = ?");
+    $select_admin->execute([$name]);
+
+    if ($select_admin->rowCount() > 0) {
+        $message[] = 'Username sudah digunakan!';
+    } else {
+        if ($pass != $cpass) {
+            $message[] = 'Kata laluan pengesahan tidak sepadan!';
+        } else {
+            $insert_admin = $conn->prepare("INSERT INTO `admins`(name,username,email, password, datetimeregistered) VALUES(?,?,?,?,?)");
+            $insert_admin->execute([$name, $username, $email, $cpass, $currentDateTime]);
+            $message[] = 'Admin baru sudah didaftarkan!';
+        }
+    }
+}
+
+if (isset($_GET['delete'])) {
+    $delete_id = $_GET['delete'];
+    $delete_admins = $conn->prepare("DELETE FROM `admins` WHERE id = ?");
+    $delete_admins->execute([$delete_id]);
+    header('location:admin-accounts.php');
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+    include '../components/functions.php';
+    includeHeaderAdmin()
+    ?>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/admin_style.css">
+
+    <!-- Starting of Data tables requirements -->
+
+    <!-- Bootstrap The most important for Data Tables -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- jQuery -->
+
+    <script src="../js/jquery.dataTables.min.js"></script>
+    <script src="../js/dataTables.bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/dataTables.bootstrap.min.css" />
+
+    <!-- Font Awesome  (Kena Sentiasa ditutup jangan kasi buka, nanti user profile icon jadi kecik gila)-->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- Ending of Data tables requirements -->
+
+    <style>
+        @media only screen and (max-width: 300px) {
+            table {
+                width: 100%;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr:nth-of-type(2n) {
+                background-color: inherit;
+            }
+
+            tr td:first-child {
+                background: #f0f0f0;
+                font-weight: bold;
+                font-size: 1.3em;
+                text-align: center;
+            }
+
+            tbody td {
+                display: block;
+                text-align: center;
+            }
+
+            tbody td:before {
+                content: attr(data-th);
+                display: block;
+                text-align: left;
+            }
+        }
+
+        .container {
+            padding: 2rem;
+        }
+
+        .table-responsive {
+            font-size: 150.5%;
+        }
+
+        .card-title {
+            font-size: 300.5%;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            /* Center buttons horizontally */
+            align-items: center;
+            /* Center buttons vertically */
+            gap: 10px;
+            /* Space between buttons */
+            margin-bottom: 3em;
+        }
+
+        /* For smaller screens, stack buttons vertically */
+        @media (max-width: 600px) {
+
+            /* Adjust the breakpoint as needed */
+            .button-container {
+                flex-direction: column;
+            }
+        }
+
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-container i {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888;
+        }
+
+        .password-container i:hover {
+            color: #333;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            /* Center buttons horizontally */
+            align-items: center;
+            /* Center buttons vertically */
+            gap: 10px;
+            /* Space between buttons */
+            margin-bottom: 3em;
+
+
+        }
+    </style>
+    <!-- Ending of Data tables requirements -->
+</head>
+
+<body>
+
+    <?php include '../components/admin_header.php'; ?>
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.1/xlsx.full.min.js"></script>
+   
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+
+
+
+
+    <!-- import javascript and css bootsrap bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <!-- import popper to use dropdowns, popovers, or tooltips-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+
+
+
+
+    <!-- End of Tables -->
+
+
+
+
+
+
+
+
+
+    <script src="../js/admin_script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+.bg_done {
+    background: #28a745 !important;
+    color: #fff;
+    padding: 0px 4px;
+    border-radius: 3px;
+}
+
+.bg_approved {
+    background: #2674da !important;
+    color: #fff;
+    padding: 0px 4px;
+    border-radius: 3px;
+}
+
+.bg_pending {
+    background: #e0820c !important;
+    color: #fff;
+    padding: 0px 4px;
+    border-radius: 3px;
+}
+
+.bg_processing {
+    background: #17a2b8 !important;
+    color: #fff;
+    padding: 0px 4px;
+    border-radius: 3px;
+}
+
+.bg_cancel {
+    background: #d60519 !important;
+    color: #fff;
+    padding: 0px 4px;
+    border-radius: 3px;
+}
+
+.fc_done {
+    color: #28a745 !important;
+}
+
+.fc_approved {
+    color: #2674da !important;
+}
+
+.fc_pending {
+    color: #ffad46 !important;
+}
+
+.fc_processing {
+    color: #17a2b8 !important;
+}
+
+.fc_cancel {
+    color: #fe3145 !important;
+}
+
+.color-black {
+    color: black;
+}
+
+.mh-600 {
+    min-height: 600px;
+}
+
+.fs-18 {
+    font-size: 18px;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+.fs-13 {
+    font-size: 13px;
+}
+
+.fs-11 {
+    font-size: 11px;
+}
+
+.iti {
+    width: 100% !important;
+}
+
+.app-login-box {
+    background: #fff !important;
+    border-radius: 10px;
+    box-shadow: #808080a3 0px 0px 14px 0px;
+    padding: 40px 26px 26px 26px !important;
+}
+
+.alert {
+    padding-left: 18px !important;
+}
+
+.alert span:nth-child(3) {
+    display: none !important;
+}
+
+.alert button {
+    border: none !important;
+    background: none !important;
+    font-size: 18px !important;
+    color: darkgray;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #c2c2c2;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+@media only screen and (max-width: 712px) {
+    .header-top-left {
+        display: none;
+    }
+
+    .top-section .overlay-bg {
+        background: #2727275c;
+    }
+
+    .top-section h1 {
+        font-size: 1.9rem !important;
+        color: #fff !important;
+    }
+
+    .top-section p {
+        color: #fff !important;
+    }
+
+    .top-section .top-banner {
+        min-height: 650px !important;
+    }
+
+    .top-section .about-service>div {
+        margin-top: -80px !important;
+    }
+
+    .top-section .about-service>div>h1 {
+        text-align: center;
+    }
+
+    .top-section .about-service>div>p {
+        text-align: justify;
+    }
+
+    .top-section .banner-right-content>div {
+        margin-top: 30px !important;
+        float: left !important;
+    }
+
+}
+
+.header-top-right {
+    margin: 0px !important;
+}
+
+.float-right-banner {
+    float: right;
+}
+
+.margin-top-110 {
+    margin-top: 110px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.bdr-bottom {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#cmbLang {
+    border: none;
+    background: none;
+    color: #fff;
+    font-size: 12px;
+}
+
+#cmbLang>option {
+    background-color: var(--theamColor);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.w-70 {
+    width: 70%;
+}
+
+#shipping-form {
+    margin-left: auto;
+    margin-right: auto;
+}
+.shipping-address-card{
+    padding: 15px !important;
+}
+.cart-count {
+    position: relative;
+    right: 7px;
+    background: red;
+    padding: 0px 4px;
+    border-radius: 51px;
+    top: -8px;
+}
+.card{
+    border: 1px solid #eeeeee;
+}
