@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Kapas Beauty Spa](images/kapas-new-logo.png)git commit -m "Initial commit: Complete Spa Booking & E-Commerce System"
+![Kapas Beauty Spa](images/kapas-new-logo.png)
 
 **A Full-Featured Spa Management & E-Commerce Platform**
 
@@ -494,62 +494,6 @@ Found a bug? Please open an issue with:
 
 ---
 
-## 🎯 Technical Challenges Overcome
-
-### Complex Problems Solved
-
-1. **Real-Time Booking System**
-   - **Challenge**: Preventing double-bookings with concurrent users
-   - **Solution**: Implemented transaction-based database locking and real-time availability checking via AJAX
-   - **Technology**: PDO transactions + FullCalendar v6 + custom AJAX endpoints
-
-2. **Dynamic Time Slot Generation**
-   - **Challenge**: Calculate available slots based on service duration and existing bookings
-   - **Solution**: Built algorithm to parse booking data and generate available time slots dynamically
-   - **Technology**: PHP date/time manipulation + Moment.js + Flatpickr
-
-3. **Payment Gateway Integration**
-   - **Challenge**: Integrate Malaysian payment processor without documentation
-   - **Solution**: Reverse-engineered API calls using cURL and implemented callback handling
-   - **Technology**: cURL + ToyyibPay API + webhook handling
-
-4. **Multi-Role Authentication**
-   - **Challenge**: Three separate user types (Customer, Admin, Staff) with different permissions
-   - **Solution**: Session-based role management with middleware-like authentication checks
-   - **Technology**: PHP Sessions + role-based access control
-
-5. **Shopping Cart with Service Booking**
-   - **Challenge**: Combine e-commerce (products) with service booking in one cart
-   - **Solution**: Unified cart system handling both product quantities and service appointments
-   - **Technology**: Session-based cart + PDO + AJAX
-
-6. **Calendar Visualization**
-   - **Challenge**: Display bookings in interactive calendar without framework
-   - **Solution**: Integrated FullCalendar v6 with custom PHP backend and AJAX data fetching
-   - **Technology**: FullCalendar + JSON API endpoints + MySQL queries
-
-7. **Image Upload System**
-   - **Challenge**: Multiple image uploads with validation and storage
-   - **Solution**: Custom file upload handler with type checking, size limits, and secure storage
-   - **Technology**: PHP file handling + server-side validation
-
-8. **Responsive Design Without Framework**
-   - **Challenge**: Mobile-first responsive design across 20+ pages
-   - **Solution**: CSS Grid + Flexbox + media queries + Bootstrap 5 components
-   - **Technology**: CSS3 + Bootstrap 5 + custom responsive utilities
-
-### Performance Optimizations
-
-- ✅ **Database Indexing** - Optimized queries with proper indexes on foreign keys
-- ✅ **Prepared Statements** - All queries use PDO prepared statements (no performance penalty from mysqli)
-- ✅ **AJAX Loading** - Reduced page reloads with asynchronous data fetching
-- ✅ **Image Optimization** - Compressed images and lazy loading
-- ✅ **Session Caching** - Reduced database queries with session-stored user data
-- ✅ **Query Optimization** - Minimized N+1 queries with JOIN statements
-
-
----
-
 ## 📜 License & Disclaimer
 
 ### Educational Use License
@@ -627,22 +571,6 @@ SOFTWARE.
 
 ---
 
-## 🙏 Acknowledgments
-
-### Technologies & Libraries Used
-- [PHP](https://www.php.net/) - Server-side programming language
-- [MySQL](https://www.mysql.com/) - Database management system
-- [Bootstrap 5](https://getbootstrap.com/) - Responsive UI framework
-- [jQuery](https://jquery.com/) - JavaScript library
-- [FullCalendar v6](https://fullcalendar.io/) - Interactive calendar scheduling
-- [Swiper.js](https://swiperjs.com/) - Touch-enabled slider
-- [SweetAlert2](https://sweetalert2.github.io/) - Beautiful alert dialogs
-- [Flatpickr](https://flatpickr.js.org/) - Date/time picker with localization
-- [Moment.js](https://momentjs.com/) - Date/time manipulation
-- [DataTables](https://datatables.net/) - Advanced table features
-- [Font Awesome 6](https://fontawesome.com/) - Icon library
-- [ToyyibPay](https://toyyibpay.com/) - Malaysian payment gateway
-- [XAMPP](https://www.apachefriends.org/) - Development environment
 
 ### Special Thanks
 - **Picrust** for the internship opportunity
