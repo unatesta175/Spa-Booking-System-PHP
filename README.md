@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Kapas Beauty Spa](images/kapas-new-logo.png)
+![Kapas Beauty Spa](images/kapas-new-logo.png)git commit -m "Initial commit: Complete Spa Booking & E-Commerce System"
 
 **A Full-Featured Spa Management & E-Commerce Platform**
 
