@@ -7,9 +7,9 @@
 !env.template
 !env.example.template
 
-# Uploaded files (optional - uncomment if needed)
-# uploaded_img/*
-# !uploaded_img/.gitkeep
+# Uploaded files - excluded to prevent user content in repo
+uploaded_img/*
+!uploaded_img/.gitkeep
 
 # Cache and temporary files
 *.log
