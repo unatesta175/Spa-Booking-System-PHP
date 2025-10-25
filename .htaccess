@@ -1,0 +1,22 @@
+# Enable error reporting for debugging (remove after setup)
+# php_flag display_errors on
+
+# Prevent directory listing
+Options -Indexes
+
+# Protect .env file
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Custom error pages (optional)
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+
+# Set default timezone
+php_value date.timezone "Asia/Kuala_Lumpur"
+
+# Increase upload size limits
+php_value upload_max_filesize 20M
+php_value post_max_size 20M

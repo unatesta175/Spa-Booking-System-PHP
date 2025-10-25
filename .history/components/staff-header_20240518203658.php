@@ -20,8 +20,14 @@
       <nav class="navbar">
          <a href="../staff/dashboard.php">home</a>
          <a href="../staff/booking-record.php">tempahan</a>
-        
-      
+         <a href="../staff/services.php">rawatan</a>
+         <a href="../staff/products.php">produk</a>
+         <a href="../staff/giftcards.php">giftcard</a>
+         <a href="../staff/credits.php">credit</a>
+         <a href="../staff/placed-orders.php">orders</a>
+         <a href="../staff/admin-accounts.php">admin</a>
+         <a href="../staff/client-accounts.php">pengguna</a>
+         <a href="../staff/staff-accounts.php">staff</a>
       </nav>
 
       <div class="icons">

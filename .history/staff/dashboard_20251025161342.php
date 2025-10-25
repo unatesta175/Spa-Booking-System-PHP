@@ -102,16 +102,20 @@ if(isset($_SESSION['login_success'])) {
 
          <div class="box">
             <?php
-            $total_bookings = 0;
-            $select_bookings = $conn->prepare("SELECT * FROM `bookings` WHERE staff_id = ?");
-            $select_bookings->execute([$staff_id]);
-            $total_bookings = $select_bookings->rowCount();
+            $total_pendings = 0;
+            $select_pendings = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
+            $select_pendings->execute(['pending']);
+            if ($select_pendings->rowCount() > 0) {
+               while ($fetch_pendings = $select_pendings->fetch(PDO::FETCH_ASSOC)) {
+                  $total_pendings += $fetch_pendings['total_price'];
+               }
+            }
             ?>
-            <h3>
-               <?= $total_bookings; ?><span></span>
+            <h3><span>RM</span>
+               <?= $total_pendings; ?><span></span>
             </h3>
-            <p>Jumlah Tempahan</p>
-            <a href="booking.php" class="btn">Lihat Tempahan</a>
+            <p>Jumlah Belum Dibayar</p>
+            <a href="placed-orders.php" class="btn">Lihat Order</a>
          </div>
 
         

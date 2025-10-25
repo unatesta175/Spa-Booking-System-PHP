@@ -20,7 +20,8 @@
       <nav class="navbar">
          <a href="../staff/dashboard.php">home</a>
          <a href="../staff/booking-record.php">tempahan</a>
-        
+         <a href="../staff/services.php">rawatan</a>
+         <a href="../staff/products.php">produk</a>
       
       </nav>
 
