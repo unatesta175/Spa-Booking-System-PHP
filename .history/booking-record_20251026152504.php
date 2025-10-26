@@ -142,65 +142,6 @@ if (isset($_SESSION['book_success'])) {
    $bookSuccessScript = "";
 }
 
-// Payment success/failure messages
-if (isset($_SESSION['payment_success'])) {
-   $paymentScript = "<script>
-           window.onload = function() {
-               Swal.fire({
-                   title: 'Pembayaran Berjaya!',
-                   text: 'Pembayaran anda telah berjaya diproses. Terima kasih!',
-                   icon: 'success',
-                   confirmButtonText: 'OK',
-                   customClass: {
-                       popup: 'my-custom-popup',
-                       title: 'my-custom-title',
-                       text: 'my-custom-text',
-                       confirmButton: 'my-custom-confirm-button'
-                   }
-               });
-           }
-         </script>";
-   unset($_SESSION['payment_success']);
-} elseif (isset($_SESSION['payment_failed'])) {
-   $paymentScript = "<script>
-           window.onload = function() {
-               Swal.fire({
-                   title: 'Pembayaran Gagal!',
-                   text: 'Pembayaran anda tidak berjaya. Sila cuba lagi.',
-                   icon: 'error',
-                   confirmButtonText: 'OK',
-                   customClass: {
-                       popup: 'my-custom-popup',
-                       title: 'my-custom-title',
-                       text: 'my-custom-text',
-                       confirmButton: 'my-custom-confirm-button'
-                   }
-               });
-           }
-         </script>";
-   unset($_SESSION['payment_failed']);
-} elseif (isset($_SESSION['payment_pending'])) {
-   $paymentScript = "<script>
-           window.onload = function() {
-               Swal.fire({
-                   title: 'Pembayaran Tertunda',
-                   text: 'Status pembayaran anda masih dalam proses. Sila semak kemudian.',
-                   icon: 'warning',
-                   confirmButtonText: 'OK',
-                   customClass: {
-                       popup: 'my-custom-popup',
-                       title: 'my-custom-title',
-                       text: 'my-custom-text',
-                       confirmButton: 'my-custom-confirm-button'
-                   }
-               });
-           }
-         </script>";
-   unset($_SESSION['payment_pending']);
-} else {
-   $paymentScript = "";
-}
-
 include 'components/wishlist_cart.php';
 
 ?>
@@ -392,8 +333,7 @@ include 'components/wishlist_cart.php';
 <?php include 'components/user-header.php'; ?>
 
 <?php echo $bookSuccessScript;
-echo $bookdeleteScript;
-echo $paymentScript; ?>
+echo $bookdeleteScript; ?>
 <div id="bruv" class="section">
    <div class="container">
       <div class="row">

@@ -142,65 +142,6 @@ if (isset($_SESSION['book_success'])) {
    $bookSuccessScript = "";
 }
 
-// Payment success/failure messages
-if (isset($_SESSION['payment_success'])) {
-   $paymentScript = "<script>
-           window.onload = function() {
-               Swal.fire({
-                   title: 'Pembayaran Berjaya!',
-                   text: 'Pembayaran anda telah berjaya diproses. Terima kasih!',
-                   icon: 'success',
-                   confirmButtonText: 'OK',
-                   customClass: {
-                       popup: 'my-custom-popup',
-                       title: 'my-custom-title',
-                       text: 'my-custom-text',
-                       confirmButton: 'my-custom-confirm-button'
-                   }
-               });
-           }
-         </script>";
-   unset($_SESSION['payment_success']);
-} elseif (isset($_SESSION['payment_failed'])) {
-   $paymentScript = "<script>
-           window.onload = function() {
-               Swal.fire({
-                   title: 'Pembayaran Gagal!',
-                   text: 'Pembayaran anda tidak berjaya. Sila cuba lagi.',
-                   icon: 'error',
-                   confirmButtonText: 'OK',
-                   customClass: {
-                       popup: 'my-custom-popup',
-                       title: 'my-custom-title',
-                       text: 'my-custom-text',
-                       confirmButton: 'my-custom-confirm-button'
-                   }
-               });
-           }
-         </script>";
-   unset($_SESSION['payment_failed']);
-} elseif (isset($_SESSION['payment_pending'])) {
-   $paymentScript = "<script>
-           window.onload = function() {
-               Swal.fire({
-                   title: 'Pembayaran Tertunda',
-                   text: 'Status pembayaran anda masih dalam proses. Sila semak kemudian.',
-                   icon: 'warning',
-                   confirmButtonText: 'OK',
-                   customClass: {
-                       popup: 'my-custom-popup',
-                       title: 'my-custom-title',
-                       text: 'my-custom-text',
-                       confirmButton: 'my-custom-confirm-button'
-                   }
-               });
-           }
-         </script>";
-   unset($_SESSION['payment_pending']);
-} else {
-   $paymentScript = "";
-}
-
 include 'components/wishlist_cart.php';
 
 ?>
@@ -356,34 +297,6 @@ include 'components/wishlist_cart.php';
 
          font-size: 1.5rem !important;
       }
-
-      /* Badge styles for booking status */
-      .bdg {
-         padding: 5px 10px;
-         border-radius: 4px;
-         font-weight: 600;
-         display: inline-block;
-      }
-
-      .bdgdanger {
-         background-color: #dc3545;
-         color: white;
-      }
-
-      .bdgsuccess {
-         background-color: #28a745;
-         color: white;
-      }
-
-      .bdginfo {
-         background-color: #17a2b8;
-         color: white;
-      }
-
-      .bdgwarning {
-         background-color: #ffc107;
-         color: #212529;
-      }
    </style>
 </head>
 
@@ -392,8 +305,7 @@ include 'components/wishlist_cart.php';
 <?php include 'components/user-header.php'; ?>
 
 <?php echo $bookSuccessScript;
-echo $bookdeleteScript;
-echo $paymentScript; ?>
+echo $bookdeleteScript; ?>
 <div id="bruv" class="section">
    <div class="container">
       <div class="row">
@@ -401,13 +313,8 @@ echo $paymentScript; ?>
             <div class="card card-default rounded-0 shadow">
                <div class="card-body">
                   <h1 class="display-4">Rekod Tempahan</h1>
-                  
-                  <div class="alert alert-info" style="font-size: 1.2rem; margin: 1rem 0;">
-                     <i class="fas fa-info-circle"></i> 
-                     <strong>Nota:</strong> Anda boleh membatalkan tempahan yang masih aktif. Tempahan yang telah selesai atau dibatalkan tidak boleh diubah.
-                  </div>
-
                   <div style="margin: 1.5rem;">
+
                      <a style="margin:1rem 0;" href="calendar.php" class="btns btn-warning"><i class="fas fa-calendar-days"></i> Lihat Tempahan di kalendar</a>
                      <a style="margin:1rem 0;" href="booking-all.php" class="btns btn-warning"><i class="fa-regular fa-calendar-plus"></i> Tambah Tempahan</a>
                   </div>
@@ -536,18 +443,7 @@ echo $paymentScript; ?>
                               
                              
 
-                               <td>'; 
-                               // Style the booking status
-                               if ($bookingstat == 'Batal') {
-                                  echo '<span class="bdg bdgdanger">' . $bookingstat . '</span>';
-                               } elseif ($bookingstat == 'Selesai') {
-                                  echo '<span class="bdg bdgsuccess">' . $bookingstat . '</span>';
-                               } elseif ($bookingstat == 'Ditempah') {
-                                  echo '<span class="bdg bdginfo">' . $bookingstat . '</span>';
-                               } else {
-                                  echo $bookingstat;
-                               }
-                               echo '</td>
+                               <td>' . $bookingstat . '</td>
                                <td>'; ?> <?php
 
                                           if ($pay_stat == 'Belum Bayar') {
@@ -562,24 +458,10 @@ echo $paymentScript; ?>
 
 
                                <td>
-                               <div class="button-container">'; 
-                               
-                               // Only show cancel button if booking is not cancelled or completed
-                               if ($bookingstat != 'Batal' && $bookingstat != 'Selesai') {
-                                  echo '<a data-tippy-content="Batalkan Tempahan" href="#" onclick="confirmCancel(\'' . $id . '\'); return false;" class="tblbtn tblremove"><i style="margin: 0em 0.2em;" class="fa fa-ban"></i></a>';
-                               }
-                               
-                               // Only show payment button if not paid and not cancelled
-                               if ($pay_stat == 'Belum Bayar' && $bookingstat != 'Batal') {
-                                  echo '<a data-tippy-content="Bayar" href="https://toyyibpay.com/' . $billcode . '" class="tblbtn tblpay"><i style="margin: 0em 0.2em;" class="fa fa-credit-card"></i></a>';
-                               }
-                               
-                               // Always show Google Calendar button for non-cancelled bookings
-                               if ($bookingstat != 'Batal') {
-                                  echo '<a data-tippy-content="Tambah ke Google Calendar" href="' . $gcal . '" class="tblbtn tblx"><i style="margin: 0em 0.2em;" class="fab fa-google nav__icon"></i></a>';
-                               }
-                               
-                               echo '
+                               <div class="button-container">
+  <a  data-tippy-content="Batalkan Tempahan" href="booking-record.php?delete=' . $id . '" onclick="return confirm(\'Adakah anda pasti untuk batalkan tempahan ini?\');" class="tblbtn tblremove"><i style="margin: 0em 0.2em;"class="fa fa-ban"></i></a>
+      <a  data-tippy-content="Bayar" href="https://toyyibpay.com/' . $billcode . '" class="tblbtn tblpay"><i style="margin: 0em 0.2em;"class="fa fa-credit-card"></i></a>
+      <a  data-tippy-content="Tambah ke Google Calendar" href="' . $gcal . '" class="tblbtn tblx" ><i style="margin: 0em 0.2em;"class="fab fa-google nav__icon"></i></a>
       </div>
       </td>
                                </tr>';
@@ -652,30 +534,5 @@ echo $paymentScript; ?>
 document.addEventListener('DOMContentLoaded', function() {
     tippy('[data-tippy-content]');
 });
-
-function confirmCancel(bookingId) {
-    Swal.fire({
-        title: 'Adakah anda pasti?',
-        text: "Tempahan ini akan dibatalkan dan tidak boleh dipulihkan!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Ya, batalkan!',
-        cancelButtonText: 'Tidak',
-        customClass: {
-            popup: 'my-custom-popup',
-            title: 'my-custom-title',
-            text: 'my-custom-text',
-            confirmButton: 'my-custom-confirm-button',
-            cancelButton: 'my-custom-cancel-button'
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Redirect to delete URL
-            window.location.href = 'booking-record.php?delete=' + bookingId;
-        }
-    });
-}
 </script>
 </html>

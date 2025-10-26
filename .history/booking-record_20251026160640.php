@@ -392,8 +392,7 @@ include 'components/wishlist_cart.php';
 <?php include 'components/user-header.php'; ?>
 
 <?php echo $bookSuccessScript;
-echo $bookdeleteScript;
-echo $paymentScript; ?>
+echo $bookdeleteScript; ?>
 <div id="bruv" class="section">
    <div class="container">
       <div class="row">
