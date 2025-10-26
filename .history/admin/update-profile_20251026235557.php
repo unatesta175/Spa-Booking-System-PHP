@@ -96,16 +96,6 @@ if (isset($_POST['submit'])) {
 
    </section>
 
-   <?php if (isset($success_message) && $success_message): ?>
-   <script>
-      Swal.fire({
-         title: 'Berjaya!',
-         text: 'Profil admin berjaya dikemaskini!',
-         icon: 'success',
-         confirmButtonText: 'OK'
-      });
-   </script>
-   <?php endif; ?>
 
    <script src="../js/admin_script.js"></script>
 

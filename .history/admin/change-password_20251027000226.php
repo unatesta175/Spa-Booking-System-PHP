@@ -56,8 +56,6 @@ if (isset($_POST['submit'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    <link rel="stylesheet" href="../css/admin_style.css">
-   
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
    <style>
       .password-container {
@@ -114,27 +112,6 @@ if (isset($_POST['submit'])) {
 
    </section>
 
-   <?php if (isset($success_message)): ?>
-   <script>
-      Swal.fire({
-         title: 'Berjaya!',
-         text: '<?= $success_message ?>',
-         icon: 'success',
-         confirmButtonText: 'OK'
-      });
-   </script>
-   <?php endif; ?>
-
-   <?php if (isset($error_message)): ?>
-   <script>
-      Swal.fire({
-         title: 'Tidak berjaya!',
-         text: '<?= $error_message ?>',
-         icon: 'error',
-         confirmButtonText: 'OK'
-      });
-   </script>
-   <?php endif; ?>
 
    <script>const passwordInputx = document.getElementById("old_pass");
 const togglePasswordx = document.getElementById("togglePasswordx");

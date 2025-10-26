@@ -139,7 +139,7 @@ if(isset($_POST['order'])){
          <i class="fas fa-info-circle"></i> Jika maklumat anda tidak tepat, sila kemaskini di halaman <a href="update-profile.php" style="color: var(--main-color);">Profil</a> anda.
       </p>
 
-      <input type="submit" name="order" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>" value="Buat Pesanan">
+      <input type="submit" name="order" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>" value="place order">
 
    </form>
 

@@ -29,14 +29,16 @@ if(empty($user_data)){
 
 if(isset($_POST['order'])){
 
-   // Use data from database
-   $name = $user_data['name'];
-   $number = $user_data['phoneno'];
-   $email = $user_data['email'];
-   $address = $user_data['address'];
-   
+   $name = $_POST['name'];
+   $name = htmlspecialchars(strip_tags(trim($name)), ENT_QUOTES, 'UTF-8');
+   $number = $_POST['number'];
+   $number = htmlspecialchars(strip_tags(trim($number)), ENT_QUOTES, 'UTF-8');
+   $email = $_POST['email'];
+   $email = htmlspecialchars(strip_tags(trim($email)), ENT_QUOTES, 'UTF-8');
    $method = $_POST['method'];
    $method = htmlspecialchars(strip_tags(trim($method)), ENT_QUOTES, 'UTF-8');
+   $address = $_POST['flat'] .', '. $_POST['city'] .', '. $_POST['state'] .' - '. $_POST['pin_code'];
+   $address = htmlspecialchars(strip_tags(trim($address)), ENT_QUOTES, 'UTF-8');
    $total_products = $_POST['total_products'];
    $total_price = $_POST['total_price'];
 
@@ -114,16 +116,21 @@ if(isset($_POST['order'])){
 
       <h3>Maklumat order anda</h3>
 
-      <div class="display-orders" style="margin-bottom: 2rem;">
-         <p><strong>Nama:</strong> <span><?= htmlspecialchars($user_data['name']); ?></span></p>
-         <p><strong>Nombor Telefon:</strong> <span><?= htmlspecialchars($user_data['phoneno']); ?></span></p>
-         <p><strong>Email:</strong> <span><?= htmlspecialchars($user_data['email']); ?></span></p>
-         <p><strong>Alamat:</strong> <span><?= htmlspecialchars($user_data['address']); ?></span></p>
-      </div>
-
       <div class="flex">
          <div class="inputBox">
-            <span>Kaedah pembayaran : <span style="color: red;">*</span></span>
+            <span>Nama anda :</span>
+            <input type="text" name="name" placeholder="Masukkan nama anda" class="box" maxlength="100" value="<?= isset($user_data['name']) ? htmlspecialchars($user_data['name']) : ''; ?>" required>
+         </div>
+         <div class="inputBox">
+            <span>Nombor telefon :</span>
+            <input type="text" name="number" placeholder="Masukkan nombor telefon" class="box" maxlength="15" value="<?= isset($user_data['phoneno']) ? htmlspecialchars($user_data['phoneno']) : ''; ?>" required>
+         </div>
+         <div class="inputBox">
+            <span>Email anda :</span>
+            <input type="email" name="email" placeholder="Masukkan email anda" class="box" maxlength="100" value="<?= isset($user_data['email']) ? htmlspecialchars($user_data['email']) : ''; ?>" required>
+         </div>
+         <div class="inputBox">
+            <span>Kaedah pembayaran :</span>
             <select name="method" class="box" required>
                <option value="">--Pilih kaedah pembayaran--</option>
                <option value="Tunai">Tunai</option>
@@ -133,13 +140,43 @@ if(isset($_POST['order'])){
                <option value="E-Wallet">E-Wallet</option>
             </select>
          </div>
+         <div class="inputBox">
+            <span>Alamat penuh :</span>
+            <textarea name="flat" placeholder="Masukkan alamat penuh anda" class="box" maxlength="500" rows="3" required><?= isset($user_data['address']) ? htmlspecialchars($user_data['address']) : ''; ?></textarea>
+         </div>
+         <div class="inputBox">
+            <span>Bandar :</span>
+            <input type="text" name="city" placeholder="Contoh: Kuala Lumpur" class="box" maxlength="100" required>
+         </div>
+         <div class="inputBox">
+            <span>Negeri :</span>
+            <select name="state" class="box" required>
+               <option value="">--Pilih negeri--</option>
+               <option value="Johor">Johor</option>
+               <option value="Kedah">Kedah</option>
+               <option value="Kelantan">Kelantan</option>
+               <option value="Melaka">Melaka</option>
+               <option value="Negeri Sembilan">Negeri Sembilan</option>
+               <option value="Pahang">Pahang</option>
+               <option value="Pulau Pinang">Pulau Pinang</option>
+               <option value="Perak">Perak</option>
+               <option value="Perlis">Perlis</option>
+               <option value="Sabah">Sabah</option>
+               <option value="Sarawak">Sarawak</option>
+               <option value="Selangor">Selangor</option>
+               <option value="Terengganu">Terengganu</option>
+               <option value="Wilayah Persekutuan Kuala Lumpur">WP Kuala Lumpur</option>
+               <option value="Wilayah Persekutuan Labuan">WP Labuan</option>
+               <option value="Wilayah Persekutuan Putrajaya">WP Putrajaya</option>
+            </select>
+         </div>
+         <div class="inputBox">
+            <span>Poskod :</span>
+            <input type="text" name="pin_code" placeholder="Contoh: 50000" maxlength="5" class="box" pattern="[0-9]{5}" required>
+         </div>
       </div>
 
-      <p style="margin-top: 1rem; font-size: 1.4rem; color: #666;">
-         <i class="fas fa-info-circle"></i> Jika maklumat anda tidak tepat, sila kemaskini di halaman <a href="update-profile.php" style="color: var(--main-color);">Profil</a> anda.
-      </p>
-
-      <input type="submit" name="order" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>" value="Buat Pesanan">
+      <input type="submit" name="order" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>" value="place order">
 
    </form>
 

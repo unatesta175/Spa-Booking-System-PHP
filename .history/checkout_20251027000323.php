@@ -11,32 +11,28 @@ if(isset($_SESSION['user_id'])){
    header('location:user-login.php');
 };
 
-// Fetch user data from database
+// Fetch user data for pre-filling form
 $user_data = [];
 if(!empty($user_id)){
-   $select_user = $conn->prepare("SELECT * FROM `clients` WHERE id = ?");
+   $select_user = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
    $select_user->execute([$user_id]);
    if($select_user->rowCount() > 0){
       $user_data = $select_user->fetch(PDO::FETCH_ASSOC);
    }
 }
 
-// Check if user data exists
-if(empty($user_data)){
-   header('location:user-login.php');
-   exit();
-}
-
 if(isset($_POST['order'])){
 
-   // Use data from database
-   $name = $user_data['name'];
-   $number = $user_data['phoneno'];
-   $email = $user_data['email'];
-   $address = $user_data['address'];
-   
+   $name = $_POST['name'];
+   $name = htmlspecialchars(strip_tags(trim($name)), ENT_QUOTES, 'UTF-8');
+   $number = $_POST['number'];
+   $number = htmlspecialchars(strip_tags(trim($number)), ENT_QUOTES, 'UTF-8');
+   $email = $_POST['email'];
+   $email = htmlspecialchars(strip_tags(trim($email)), ENT_QUOTES, 'UTF-8');
    $method = $_POST['method'];
    $method = htmlspecialchars(strip_tags(trim($method)), ENT_QUOTES, 'UTF-8');
+   $address = 'flat no. '. $_POST['flat'] .', '. $_POST['street'] .', '. $_POST['city'] .', '. $_POST['state'] .', '. $_POST['country'] .' - '. $_POST['pin_code'];
+   $address = htmlspecialchars(strip_tags(trim($address)), ENT_QUOTES, 'UTF-8');
    $total_products = $_POST['total_products'];
    $total_price = $_POST['total_price'];
 
@@ -51,9 +47,9 @@ if(isset($_POST['order'])){
       $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
       $delete_cart->execute([$user_id]);
 
-      $success_message = 'Order berjaya dibuat!';
+      $message[] = 'order placed successfully!';
    }else{
-      $error_message = 'Troli anda kosong!';
+      $message[] = 'Troli anda kosong';
    }
 
 }
@@ -66,16 +62,13 @@ if(isset($_POST['order'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Checkout</title>
+   <title>checkout</title>
    
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
-   
-   <!-- Sweet Alert -->
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <body>
@@ -114,32 +107,55 @@ if(isset($_POST['order'])){
 
       <h3>Maklumat order anda</h3>
 
-      <div class="display-orders" style="margin-bottom: 2rem;">
-         <p><strong>Nama:</strong> <span><?= htmlspecialchars($user_data['name']); ?></span></p>
-         <p><strong>Nombor Telefon:</strong> <span><?= htmlspecialchars($user_data['phoneno']); ?></span></p>
-         <p><strong>Email:</strong> <span><?= htmlspecialchars($user_data['email']); ?></span></p>
-         <p><strong>Alamat:</strong> <span><?= htmlspecialchars($user_data['address']); ?></span></p>
-      </div>
-
       <div class="flex">
          <div class="inputBox">
-            <span>Kaedah pembayaran : <span style="color: red;">*</span></span>
+            <span>your name :</span>
+            <input type="text" name="name" placeholder="enter your name" class="box" maxlength="20" required>
+         </div>
+         <div class="inputBox">
+            <span>your number :</span>
+            <input type="number" name="number" placeholder="enter your number" class="box" min="0" max="9999999999" onkeypress="if(this.value.length == 10) return false;" required>
+         </div>
+         <div class="inputBox">
+            <span>your email :</span>
+            <input type="email" name="email" placeholder="enter your email" class="box" maxlength="50" required>
+         </div>
+         <div class="inputBox">
+            <span>payment method :</span>
             <select name="method" class="box" required>
-               <option value="">--Pilih kaedah pembayaran--</option>
-               <option value="Tunai">Tunai</option>
-               <option value="Kad kredit">Kad Kredit</option>
-               <option value="Kad debit">Kad Debit</option>
-               <option value="Online Banking">Online Banking</option>
-               <option value="E-Wallet">E-Wallet</option>
+               <option value="cash on delivery">cash on delivery</option>
+               <option value="credit card">credit card</option>
+               <option value="paytm">paytm</option>
+               <option value="paypal">paypal</option>
             </select>
+         </div>
+         <div class="inputBox">
+            <span>address line 01 :</span>
+            <input type="text" name="flat" placeholder="e.g. flat number" class="box" maxlength="50" required>
+         </div>
+         <div class="inputBox">
+            <span>address line 02 :</span>
+            <input type="text" name="street" placeholder="e.g. street name" class="box" maxlength="50" required>
+         </div>
+         <div class="inputBox">
+            <span>city :</span>
+            <input type="text" name="city" placeholder="e.g. mumbai" class="box" maxlength="50" required>
+         </div>
+         <div class="inputBox">
+            <span>state :</span>
+            <input type="text" name="state" placeholder="e.g. maharashtra" class="box" maxlength="50" required>
+         </div>
+         <div class="inputBox">
+            <span>country :</span>
+            <input type="text" name="country" placeholder="e.g. India" class="box" maxlength="50" required>
+         </div>
+         <div class="inputBox">
+            <span>pin code :</span>
+            <input type="number" min="0" name="pin_code" placeholder="e.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
          </div>
       </div>
 
-      <p style="margin-top: 1rem; font-size: 1.4rem; color: #666;">
-         <i class="fas fa-info-circle"></i> Jika maklumat anda tidak tepat, sila kemaskini di halaman <a href="update-profile.php" style="color: var(--main-color);">Profil</a> anda.
-      </p>
-
-      <input type="submit" name="order" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>" value="Buat Pesanan">
+      <input type="submit" name="order" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>" value="place order">
 
    </form>
 
@@ -158,32 +174,6 @@ if(isset($_POST['order'])){
 
 
 <?php include 'components/footer.php'; ?>
-
-<?php if (isset($success_message)): ?>
-<script>
-   Swal.fire({
-      title: 'Berjaya!',
-      text: '<?= $success_message ?>',
-      icon: 'success',
-      confirmButtonText: 'OK'
-   }).then((result) => {
-      if (result.isConfirmed) {
-         window.location.href = 'orders.php';
-      }
-   });
-</script>
-<?php endif; ?>
-
-<?php if (isset($error_message)): ?>
-<script>
-   Swal.fire({
-      title: 'Tidak berjaya!',
-      text: '<?= $error_message ?>',
-      icon: 'error',
-      confirmButtonText: 'OK'
-   });
-</script>
-<?php endif; ?>
 
 <script src="js/script.js"></script>
 

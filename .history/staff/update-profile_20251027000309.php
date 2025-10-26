@@ -118,16 +118,6 @@ if (isset($_POST['submit'])) {
 
    </section>
 
-   <?php if (isset($success_message) && $success_message): ?>
-   <script>
-      Swal.fire({
-         title: 'Berjaya!',
-         text: 'Profil staff berjaya dikemaskini!',
-         icon: 'success',
-         confirmButtonText: 'OK'
-      });
-   </script>
-   <?php endif; ?>
 
    <script src="../js/staff_script.js"></script>
 
