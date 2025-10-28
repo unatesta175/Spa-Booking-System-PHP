@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![Lunara Spa](images/lunara-new-logo.png)
-
 **A Full-Featured Spa Management & E-Commerce Platform**
 
 [![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
