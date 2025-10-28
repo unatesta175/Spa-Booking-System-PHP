@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
 
       <form action="" method="post">
          <img class=" underline" style=" margin-top: 3em;
-      margin-bottom: 3em;" width="auto" height="100" src="./images/kapas-new-logo.png" alt="">
+      margin-bottom: 3em;" width="auto" height="100" src="./images/Lunara Spa-new-logo.png" alt="">
          <br>
          <h3>Log Masuk </h3>
          <br>

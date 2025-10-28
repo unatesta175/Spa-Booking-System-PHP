@@ -189,18 +189,18 @@ if (isset($_GET['delete'])) {
                <label for="type">Jenis Pakej Rawatan : <span style="color: red;">*</span></label>
                <select id="type" name="type" class="box" required>
                   <option value="" disabled selected>Pilih jenis pakej</option>
-                  <option value="Pakej Spa">Pakej Spa</option>
-                  <option value="Urutan Badan">Urutan Badan</option>
+                  <option value="Pakej Terapi Badan">Pakej Terapi Badan</option>
+                  <option value="Terapi Urutan">Terapi Urutan</option>
                   <option value="Skrub">Skrub</option>
-                  <option value="Rawatan Facial">Rawatan Facial</option>
-                  <option value="Mandian">Mandian</option>
-                  <option value="Sauna">Sauna</option>
-                  <option value="Rawatan Kaki">Rawatan Kaki</option>
-                  <option value="Waxing">Waxing</option>
-                  <option value="Bekam Sunnah">Bekam Sunnah</option>
-                  <option value="Rawatan Resdung">Rawatan Resdung</option>
-                  <option value="Balutan Badan">Balutan Badan</option>
-                  <option value="Fisioterapi">Fisioterapi</option>
+                  <option value="Rawatan Muka">Rawatan Muka</option>
+                  <option value="Terapi Rendaman">Terapi Rendaman</option>
+                  <option value="Terapi Wap">Terapi Wap</option>
+                  <option value="Terapi Kaki ">Terapi Kaki </option>
+                  <option value="Terapi Wax">Terapi Wax</option>
+                  <option value="Terapi Bekam">Terapi Bekam</option>
+                  <option value="Terapi Sinus">Terapi Sinus</option>
+                  <option value="Terapi Balutan">Terapi Balutan</option>
+                  <option value="Terapi Pemulihan">Terapi Pemulihan</option>
                   <option value="Lain-lain">Lain-lain</option>
                </select>
             </div>

@@ -53,7 +53,7 @@ include 'components/wishlist_cart.php';
 
                      <h3>Lain-lain</h3>
                      <br>
-                     <span>Walaupun nampak kecil, namun impaknya besar. Pilih pakej – pakej eyelash perming dan manikur/pedikur untuk kuku anda.</span>
+                     <span>Sentuhan kecil yang memberikan perbezaan besar pada penampilan anda. Kami menawarkan perkhidmatan kecantikan bulu mata dan rawatan kuku untuk melengkapkan keanggunan anda.</span>
                      <br>
                      <a href="#main" class="btn">Lihat Pakej Sedia Ada</a>
                      <br>

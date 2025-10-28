@@ -1,8 +1,8 @@
-# 🌸 Kapas Beauty Spa - Complete Booking & E-Commerce System
+# 🌸 Lunara Spa - Complete Booking & E-Commerce System
 
 <div align="center">
 
-![Kapas Beauty Spa](images/kapas-new-logo.png)
+![Lunara Spa](images/lunara-new-logo.png)
 
 **A Full-Featured Spa Management & E-Commerce Platform**
 
@@ -28,7 +28,9 @@
 
 This comprehensive spa booking and e-commerce system was **developed entirely from scratch** as a solo project during my internship at **Picrust** (February 2024 - July 2024).
 
-> **⚠️ DISCLAIMER:** This project is developed **for educational and learning purposes only**. The logo, images, and brand assets used in this project are **not owned by me** and belong to their respective copyright holders. This is a portfolio project to demonstrate technical skills and is not intended for commercial use.
+> **ℹ️ INSPIRATION:** This project was inspired by **Kapas Spa Beauty**. The **Lunara Spa logo and brand** were **created by me (Muhammad Ilyas Bin Amran)** as original work. All service category images are sourced from **Freepik**, **Unsplash**, and **Pexels.com** under their respective free licenses. Service names and categories have been modified to create a unique identity.
+
+> **⚠️ DISCLAIMER:** This project is developed **for educational and learning purposes only**. This is a portfolio project to demonstrate technical skills and is not intended for commercial use.
 
 ### 🎯 The Challenge
 
@@ -61,11 +63,11 @@ I challenged myself to build a complete, production-ready web application **usin
   - Interactive calendar interface (FullCalendar.js integration)
   - Multiple service categories:
     - Facial treatments
-    - Body massage (Urutan Badan)
-    - Sauna sessions
-    - Foot treatments (Rawatan Kaki)
-    - Cupping therapy (Bekam Sunnah)
-    - Waxing services
+    - Body massage (Terapi Urutan)
+    - Terapi Wap sessions
+    - Foot treatments (Terapi Kaki )
+    - Cupping therapy (Terapi Bekam)
+    - Terapi Wax services
     - Scrub treatments
     - And 6 more specialized services
   - Dynamic time slot management
@@ -164,6 +166,156 @@ I challenged myself to build a complete, production-ready web application **usin
   - Personal information
   - Password change
   - Work schedule
+
+---
+
+## 🔧 Why the Booking System Took 1 Month to Build
+
+### The Challenge
+
+The booking system looks simple - just pick a date and time, right? Wrong. It's the **hardest part** of this project and took almost **1 month** to get right.
+
+---
+
+### 💡 Why It's So Hard
+
+#### 1. **Time Overlap Logic**
+
+You need to catch EVERY way two bookings can overlap:
+
+```
+Case 1: New starts during existing    Case 2: New ends during existing
+Existing:  |-------|                  Existing:      |-------|
+New:           |-------|              New:       |-------|
+
+Case 3: New wraps existing            Case 4: Existing wraps new
+Existing:    |---|                    Existing:  |---------|
+New:       |---------|                New:         |---|
+```
+
+**The fix:**
+```php
+// One simple check catches all cases
+if ($newStart < $existingEnd && $newEnd > $existingStart) {
+    // They overlap!
+}
+```
+
+My first try missed some cases and let therapists get double-booked.
+
+---
+
+#### 2. **Different Service Times**
+
+- 60-min service at 10:00 ends at 11:00
+- 90-min service at 10:30 ends at 12:00  
+- These overlap but have different time strings!
+
+**My mistake:** I checked if time strings matched like "10:00 - 11:30 AM". This missed overlaps with different durations.
+
+**The fix:** Compare actual start/end times, not text strings.
+
+---
+
+#### 3. **3 Different Interfaces = 3× Work**
+
+Every feature needs to work in:
+- Public booking page
+- Staff booking page  
+- Admin booking page
+
+Every bug fix = update 6+ files to stay consistent.
+
+---
+
+#### 4. **Database Problems**
+
+Had to handle:
+- Two users booking same slot at the same time
+- Cancelled bookings still blocking slots (big bug!)
+- Payment failures mid-booking
+- Making sure all time data matches up
+
+One mistake = lost bookings or double-bookings.
+
+---
+
+#### 5. **Real-Time Updates**
+
+```javascript
+// Page updates without refresh when:
+// - Date changes
+// - Staff changes
+// - Service changes (different durations!)
+```
+
+Keeping green/red buttons accurate was tricky.
+
+---
+
+#### 6. **Payment System**
+
+ToyyibPay integration needs:
+- Create booking ID before payment
+- Handle payment success/failure
+- Sync payment status with booking status
+
+Bugs here = lost money or angry customers.
+
+---
+
+### 📊 Time Breakdown (1 Month Total)
+
+| Task | Days | Why It Took Long |
+|------|------|------------------|
+| Booking form & UI | 3-4 | Date picker, dropdowns, AJAX |
+| Time slot generator | 2-3 | Loop logic, formatting |
+| Overlap detection | 2 | First version had bugs |
+| Database setup | 1 | Getting structure right |
+| Payment system | 4-5 | ToyyibPay API integration |
+| Staff/Admin pages | 3-4 | Copy logic for 3 interfaces |
+| Bug fixes | 5-7 | Finding and fixing issues |
+| Testing | 5-6 | Testing 100+ scenarios |
+| **Total** | **25-30 days** | **Almost 1 month!** |
+
+---
+
+### 🔨 Main Bugs I Fixed
+
+**Bug 1: Bad Overlap Check**
+- Missed some overlap cases
+- Let therapists get double-booked
+- Fixed with better math formula
+
+**Bug 2: Cancelled Bookings Block Slots**
+- Cancelled appointments still showed as busy
+- Fixed by filtering them out:
+```php
+WHERE bookingstat != 'Dibatalkan' AND bookingstat != 'Cancelled'
+```
+
+**Bug 3: Comparing Text Instead of Times**
+- Only checked if time strings matched exactly
+- Example: "10:00-11:30 AM" vs "10:30-12:00 PM" 
+- These overlap but are different strings!
+- Fixed by comparing actual times
+
+**Bug 4: Different Duration Problems**
+- 60-min and 90-min services could overlap
+- Fixed by Bug 3's time comparison
+
+---
+
+### 🎯 What I Learned
+
+This "simple" booking form taught me:
+- Math matters (overlap logic)
+- Database race conditions
+- Why testing takes so long
+- How to keep code consistent across multiple files
+- Real production problems
+
+**Bottom line:** Booking systems look easy but aren't. Even big companies get these bugs. Taking 1 month for this is normal when building from scratch.
 
 ---
 
@@ -267,7 +419,7 @@ POST /components/wishlist_cart.php // Add to cart/wishlist
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/kapasbeautyspa.com.git
+git clone https://github.com/yourusername/lunaraspa.com.git
 
 # Or download and extract the ZIP file
 ```
@@ -319,43 +471,84 @@ APP_DEBUG=true
 #### For XAMPP:
 1. Move the project to `C:\xampp\htdocs\`
 2. Start Apache and MySQL from XAMPP Control Panel
-3. Access the application at: `http://localhost/kapasbeautyspa.com/`
+3. Access the application at: `http://localhost/lunaraspa.com/`
 
 ### 6️⃣ Create Required Directories
 
-The `uploaded_img/` folder is used for user-uploaded content (product images, profile pictures, etc.) and is excluded from Git for privacy and size reasons.
+Both image folders are excluded from Git, so you need to create them and add your own images.
 
 ```bash
-# Create the uploaded_img folder if it doesn't exist
+# Create the required folders
+
 # Windows Command Prompt
 mkdir uploaded_img
+mkdir images
 
 # Windows PowerShell
 New-Item -ItemType Directory -Force -Path uploaded_img
+New-Item -ItemType Directory -Force -Path images
 
 # Linux/Mac
-mkdir -p uploaded_img
+mkdir -p uploaded_img images
 ```
 
 **Set proper permissions** (Linux/Mac only):
 ```bash
-chmod 755 uploaded_img
+chmod 755 uploaded_img images
 ```
 
-> **Note:** This folder is automatically excluded from version control via `.gitignore` to prevent user-uploaded content from being committed to the repository. You will need to add your own product images and content after installation.
+#### 📁 Images Folder Setup
+
+The `images/` folder contains static UI images. You need to add the following files:
+
+**Required Logo & Icons:**
+- `lunara-new-logo.png` - Main spa logo (displayed in header and README)
+
+**Service Category Images (14 files):**
+You need 14 service category images named `sc1.png` through `sc14.png`:
+- `sc1.png` - Facial treatment image
+- `sc2.png` - Body massage image  
+- `sc3.png` - Wap therapy image
+- `sc4.png` - Foot treatment image
+- `sc5.png` - Cupping therapy image
+- `sc6.png` - Waxing service image
+- `sc7.png` - Scrub treatment image
+- `sc8.png` - Service category 8
+- `sc9.png` - Service category 9
+- `sc10.png` - Service category 10
+- `sc11.png` - Service category 11
+- `sc12.png` - Service category 12
+- `sc13.png` - Service category 13
+- `sc14.png` - Service category 14
+
+**Where to get images:**
+- 📸 **Freepik** - https://www.freepik.com (Free License)
+- 📸 **Unsplash** - https://unsplash.com (Free for commercial use)
+- 📸 **Pexels** - https://www.pexels.com (Free License)
+
+**Image recommendations:**
+- Format: PNG or JPG
+- Size: 800x600px or similar (will be auto-resized)
+- Quality: High resolution for clarity
+
+#### 📦 Uploaded_img Folder
+
+The `uploaded_img/` folder is for user-uploaded content (product images, profile pictures) managed through the admin panel.
+
+> **Note:** Both folders are excluded from version control via `.gitignore` to keep the repository size small and prevent licensing issues. You must add your own images after installation.
 
 ### 7️⃣ Access the Application
 
-- **Main Website:** `http://localhost/kapasbeautyspa.com/`
-- **Admin Panel:** `http://localhost/kapasbeautyspa.com/admin/`
-- **Staff Panel:** `http://localhost/kapasbeautyspa.com/staff/`
+- **Main Website:** `http://localhost/lunaraspa.com/`
+- **Admin Panel:** `http://localhost/lunaraspa.com/admin/`
+- **Staff Panel:** `http://localhost/lunaraspa.com/staff/`
 
 ---
 
 ## 📁 Project Structure
 
 ```
-kapasbeautyspa.com/
+lunaraspa.com/
 ├── 📂 admin/                    # Admin panel files
 │   ├── dashboard.php           # Admin dashboard
 │   ├── booking.php             # Booking management
@@ -466,14 +659,29 @@ The system uses the following main tables:
 
 ### Image Folders
 
-This project uses several image directories:
+This project uses two image directories:
 
 | Folder | Purpose | Git Tracked? | Action Needed |
 |--------|---------|--------------|---------------|
-| `images/` | Static UI images, logos, icons | ✅ Yes | Keep as is |
-| `uploaded_img/` | User-uploaded content (products, profiles) | ❌ No | Create folder & add content |
+| `images/` | Static UI images, logos, service categories | ❌ No | Create folder & add 15 images (see step 6) |
+| `uploaded_img/` | User-uploaded content (products, profiles) | ❌ No | Create folder & add content via admin panel |
 
-> **For new installations:** After cloning, create the `uploaded_img/` folder (see installation step 6) and add your product images through the admin panel.
+> **Important:** Both folders are **excluded from GitHub**. After cloning, you MUST create these folders and add your own images (see [Installation Step 6](#6%EF%B8%8F⃣-create-required-directories) for the complete list and naming guide).
+
+### Image Sources & Recommendations
+
+**Where to get free images:**
+- 📸 **Freepik** - https://www.freepik.com (Free License)
+- 📸 **Unsplash** - https://unsplash.com (Free for commercial use)
+- 📸 **Pexels** - https://www.pexels.com (Free License)
+
+**Logo:**
+- Create your own spa logo or hire a designer
+- Name it: `lunara-new-logo.png`
+
+**Service Categories:**
+- Search for spa-related images (massage, facial, therapy, etc.)
+- Name them: `sc1.png`, `sc2.png`, ... `sc14.png`
 
 ---
 
@@ -515,10 +723,15 @@ This project is developed for **educational and learning purposes only** as part
 
 ### ⚠️ Important Copyright Notice
 
-**Assets & Brand Materials:**
-- The **Kapas Beauty Spa logo** and brand name are **NOT owned by me**
-- All **images, graphics, and visual assets** used in this project belong to their respective copyright holders
-- The **ToyyibPay** brand and API belong to ToyyibPay Sdn Bhd
+**Brand & Assets Attribution:**
+- **Inspiration:** This project was inspired by Kapas Spa Beauty's business model
+- **Logo & Brand:** The Lunara Spa logo and brand identity were **created by Muhammad Ilyas Bin Amran** as original work
+- **Service Images:** All service category images are sourced from:
+  - **Freepik** (https://www.freepik.com) - Free images under Freepik License
+  - **Unsplash** (https://unsplash.com) - Free images under Unsplash License
+  - **Pexels** (https://www.pexels.com) - Free images under Pexels License
+- **Service Names:** All service names and categories have been modified and customized
+- **ToyyibPay:** The ToyyibPay brand and API belong to ToyyibPay Sdn Bhd
 - This project uses these materials **strictly for educational demonstration purposes**
 
 ### Usage Restrictions
@@ -526,9 +739,10 @@ This project is developed for **educational and learning purposes only** as part
 - ✅ **Allowed:** Use the code for learning, study, and portfolio purposes
 - ✅ **Allowed:** Reference the architecture and implementation patterns
 - ✅ **Allowed:** Fork and modify for personal educational projects
+- ✅ **Allowed:** Use of images from Freepik, Unsplash, and Pexels per their respective licenses
 - ❌ **NOT Allowed:** Commercial use without proper licensing
-- ❌ **NOT Allowed:** Use of logo, images, or brand materials without permission from owners
-- ❌ **NOT Allowed:** Claiming ownership of assets that belong to others
+- ❌ **NOT Allowed:** Use of Lunara Spa brand and logo without permission from creator
+- ❌ **NOT Allowed:** Violating Freepik, Unsplash, or Pexels license terms
 
 ### Fair Use Statement
 
@@ -596,7 +810,7 @@ SOFTWARE.
 Need help? Have questions?
 
 - 📧 Email: muhammadilyasamran.com
-- 💬 Issues: [GitHub Issues](https://github.com/unatesta175/kapasbeautyspa.com/issues)
+- 💬 Issues: [GitHub Issues](https://github.com/unatesta175/lunaraspa.com/issues)
 - 📖 Docs: [Read the Setup Guide](README_SETUP.md)
 
 ---
@@ -639,7 +853,7 @@ Contact: [muhammadilyasamran.com]
 
 **© 2024 Muhammad Ilyas Bin Amran**
 
-*Educational Portfolio Project • Logo & Images Not Owned by Developer • For Learning Purposes Only*
+*Educational Portfolio Project • Inspired by Kapas Spa Beauty • Logo & Brand Created by Developer • Images from Freepik, Unsplash & Pexels • For Learning Purposes Only*
 
 </div>
 

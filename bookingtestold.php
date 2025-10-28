@@ -198,8 +198,8 @@ if (isset($_POST['submit'])) {
          'billPayorInfo' => 1,
          // 'billAmount' => $rmx100,
          'billAmount' =>  $bruh,
-         'billReturnUrl' => (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . '/kapasbeautyspa.com/payment-success.php?booking_id=' . $last_inserted_id,
-         'billCallbackUrl' => (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . '/kapasbeautyspa.com/payment-callback.php',
+         'billReturnUrl' => (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . '/lunaraspa.com/payment-success.php?booking_id=' . $last_inserted_id,
+         'billCallbackUrl' => (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . '/lunaraspa.com/payment-callback.php',
          'billExternalReferenceNo' => $last_inserted_id,
          'billTo' => $name,
          'billEmail' => $email,
@@ -541,7 +541,7 @@ include 'components/wishlist_cart.php';
                   if ($selectedDate->format('N') == 2) { // Check if the day of the week is Tuesday (2)
                   ?>
                      <h1 id="selectedDate" class="text-center" style="margin:20px; font-size:2rem;">Anda pilih tarikh pada
-                        hari Selasa iaitu hari tutup Kapas Beauty Spa</h1> <!-- Display message for Tuesday -->
+                        hari Selasa iaitu hari tutup Lunara Spa</h1> <!-- Display message for Tuesday -->
                      <div class="timeslots-container">
                         <div style="margin:1rem !important;" class='alert alert-secondary'>Tiada slot masa tempahan terbuka
                            pada hari Selasa.</div> <!-- Display message for no available slots on Tuesday -->

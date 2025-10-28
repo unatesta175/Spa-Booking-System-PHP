@@ -11,6 +11,11 @@
 uploaded_img/*
 !uploaded_img/.gitkeep
 
+# Images folder - users should create their own with proper images
+images/*
+!images/.gitkeep
+!images/README.md
+
 # Cache and temporary files
 *.log
 *.tmp
@@ -19,6 +24,7 @@ uploaded_img/*
 # IDE and editor files
 .vscode/
 .idea/
+.history/
 *.swp
 *.swo
 *~

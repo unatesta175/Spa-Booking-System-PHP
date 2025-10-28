@@ -88,7 +88,7 @@ if(isset($_SESSION['login_success'])) {
       <h1 class="heading">dashboard</h1>
       <div class="image-container">
          <img  style="margin-top: 10px; margin-bottom: 10px;" width="auto" height="70"
-            src="../images/kapas-new-logo.png" alt="">
+            src="../images/Lunara Spa-new-logo.png" alt="">
       </div>
       <div class="box-container">
 

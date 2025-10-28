@@ -1,16 +1,16 @@
 <?php
    function includeHeader() {
-      echo '<title>kapasbeautyspa.com</title>';
+      echo '<title>lunaraspa.com</title>';
       echo '<link rel="icon" type="image/png" href="images/logo.png">';
    }
    
    function includeHeaderAdmin() {
-      echo '<title>kapasbeautyspa.com</title>';
+      echo '<title>lunaraspa.com</title>';
       echo '<link rel="icon" type="image/png" href="../images/logo.png">';
    }
 
    function includeTitle() {
-    echo '<title>kapasbeautyspa.com</title>';
+    echo '<title>lunaraspa.com</title>';
     echo '<link rel="icon" type="image/png" href="../images/logo.png">';
  }
 

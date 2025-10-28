@@ -44,27 +44,38 @@ $latest_id = $latest_id_row['id']+1;
 $formatted_id = 'KB' . str_pad($latest_id, 8, '0', STR_PAD_LEFT);
 
 
-$stmt = $conn->prepare("SELECT * FROM bookings WHERE date = ? AND timeslot = ? ");
-$stmt->execute([$date, $timeslot]);
+// Convert start and end times to timestamps for proper overlap checking
+$newBookingStartTime = strtotime($starttime);
+$newBookingEndTime = strtotime($endtime);
+
+// Check for overlapping bookings with the same staff on the same date
+// Exclude cancelled bookings from the check
+$stmt = $conn->prepare("SELECT * FROM bookings WHERE date = ? AND staff_id = ? AND bookingstat != 'Dibatalkan' AND bookingstat != 'Cancelled'");
+$stmt->execute([$date, $staff]);
 $existing_bookings = [];
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $existing_bookings[] = $row;
 }
 
-
 $booking_allowed = true;
-$booked_staff_ids = [];
+$conflict_message = "";
+
+// Check for time conflicts using proper interval overlap logic
 foreach ($existing_bookings as $booking) {
-        $booked_staff_ids[] = $booking['staff_id'];
-        if ($booking['staff_id'] == $staff) {
-                // User already booked the same timeslot with the same staff
+        $existingStartTime = strtotime($booking['starttime']);
+        $existingEndTime = strtotime($booking['endtime']);
+        
+        // Standard interval overlap check: (start1 < end2) AND (end1 > start2)
+        // This correctly handles all overlap scenarios regardless of duration
+        if ($newBookingStartTime < $existingEndTime && $newBookingEndTime > $existingStartTime) {
                 $booking_allowed = false;
+                $conflict_message = "Slot masa ini sudah ditempah oleh pakar terapi yang dipilih. Sila pilih slot masa yang lain.";
                 break;
         }
 }
 
-if (!$booking_allowed || count(array_unique($booked_staff_ids)) < count($existing_bookings)) {
-        $msg = "<div class='alert alert-danger'>Anda tidak boleh menempah slot masa ini dengan ahli terapi yang sama /Sudah ada tempahan bertindih untuk ahli terapi yang dipilih!</div>";
+if (!$booking_allowed) {
+        $msg = "<div class='alert alert-danger'>$conflict_message</div>";
 } else {
         // Check if the user is already registered
     $stmt = $conn->prepare("INSERT INTO `bookings` ( booking_id, timeslot, date, starttime, endtime, duration, datetimeapplied, updated_at, claimstat, bookingstat, pay_amount, pay_stat, client_id, service_id, staff_id) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");

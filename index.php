@@ -85,13 +85,13 @@ include 'components/wishlist_cart.php';
 
       <div class="swiper-slide slide">
          <div class="image">
-            <img src="images/h1.png" alt="">
+            <img src="images/h2.png" alt="">
          </div>
          <div class="content">
             
-            <h3>Rawatan & Pakej</h3>
+            <h3>Rawatan & Terapi</h3>
             <br>
-            <span>yang kami tawarkan di beauty spa</span><br>
+            <span>yang kami tawarkan di Lunara Spa</span><br>
             <a href="shop.php" class="btn">Lihat Pakej Sedia Ada</a>
             <a href="booking-all.php" class="btn">Tempah </a>
          </div>
@@ -99,7 +99,7 @@ include 'components/wishlist_cart.php';
       
       <div class="swiper-slide slide">
          <div class="image">
-            <img src="images/h2.png" alt="">
+            <img src="images/h1.png" alt="">
          </div>
          <div class="content">
             
@@ -124,31 +124,7 @@ include 'components/wishlist_cart.php';
          </div>
       </div>
 
-      <div class="swiper-slide slide">
-         <div class="image">
-            <img src="images/h5.png" alt="">
-         </div>
-         <div class="content">
-            
-            <h3>Kapas Voucher Gift</h3>
-            <br>
-            <span>Penghargaan kepada insan tercinta!</span> <br>
-            <a href="shop.php" class="btn">Dapatkan Spa Voucher</a>
-         </div>
-      </div>
-
-      <div class="swiper-slide slide">
-         <div class="image">
-            <img src="images/h5.png" alt="">
-         </div>
-         <div class="content">
-            
-            <h3>Pakej Kredit</h3>
-            <br>
-        <span>Dapatkan bonus kredit dengan pakej kredit kami</span> <br>
-            <a href="shop.php" class="btn">Tambah credit spa</a>
-         </div>
-      </div>
+      
 
    </div>
 
@@ -199,7 +175,7 @@ include 'components/wishlist_cart.php';
 
 <section class="home-products">
 
-   <h1 class="heading">Pakej Spa Sedia ada</h1>
+   <h1 class="heading">Pakej Rawatan</h1>
 
    <div class="swiper products-slider">
 
@@ -244,93 +220,9 @@ include 'components/wishlist_cart.php';
 
 
 
-<section class="home-products">
 
-   <h1 class="heading">Pakej kredit </h1>
 
-   <div class="swiper products-slider">
 
-   <div class="swiper-wrapper">
-
-   <?php
-     $select_products = $conn->prepare("SELECT * FROM `credits`"); 
-     $select_products->execute();
-     if($select_products->rowCount() > 0){
-      while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
-   ?>
-   <form action="" method="post" class="swiper-slide slide">
-      <input type="hidden" name="pid" value="<?= $fetch_product['id']; ?>">
-      <input type="hidden" name="name" value="<?= $fetch_product['name']; ?>">
-      <input type="hidden" name="price" value="<?= $fetch_product['price']; ?>">
-      <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
-      <button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
-      <a href="quick-view.php?pid=<?= $fetch_product['id']; ?>" class="fas fa-eye"></a>
-      <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
-      <div class="name"><?= $fetch_product['name']; ?></div>
-      <div class="flex">
-      <div class="price"><span>RM</span><?= intVal($fetch_product['price']); ?><span></span></div>
-         <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
-      </div>
-      <input type="submit" value="masuk dalam troli" class="btn" name="add_to_cart">
-   </form>
-   <?php
-      }
-   }else{
-      echo '<p class="empty">tiada pakej kredit!</p>';
-   }
-   ?>
-
-   </div>
-
-   <div class="swiper-pagination"></div>
-
-   </div>
-
-</section>
-
-<section class="home-products">
-
-   <h1 class="heading">Giftcard Sedia ada</h1>
-
-   <div class="swiper products-slider">
-
-   <div class="swiper-wrapper">
-
-   <?php
-     $select_products = $conn->prepare("SELECT * FROM `giftcards` "); 
-     $select_products->execute();
-     if($select_products->rowCount() > 0){
-      while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
-   ?>
-   <form action="" method="post" class="swiper-slide slide">
-      <input type="hidden" name="pid" value="<?= $fetch_product['id']; ?>">
-      <input type="hidden" name="name" value="<?= $fetch_product['name']; ?>">
-      <input type="hidden" name="price" value="<?= $fetch_product['price']; ?>">
-      <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
-      <button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
-      <a href="quick-view.php?pid=<?= $fetch_product['id']; ?>" class="fas fa-eye"></a>
-      <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
-      <div class="name"><?= $fetch_product['name']; ?></div>
-      <div class="flex">
-         <div class="price"><span>RM</span><?= intVal($fetch_product['price']); ?><span></span></div>
-         <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
-      </div>
-      <input type="submit" value="masuk dalam troli" class="btn" name="add_to_cart">
-   </form>
-   <?php
-      }
-   }else{
-      echo '<p class="empty">tiada giftcard!</p>';
-   }
-   ?>
-
-   </div>
-
-   <div class="swiper-pagination"></div>
-
-   </div>
-
-</section>
 
 
 

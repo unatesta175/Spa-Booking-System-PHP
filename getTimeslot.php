@@ -8,7 +8,8 @@ include 'components/connect.php'; ?>
 
 $existingBookings = [];
 
-$stmt = $conn->prepare("SELECT * FROM bookings WHERE date = ? AND staff_id = ?");
+// Only get active bookings (exclude cancelled bookings) for the selected staff and date
+$stmt = $conn->prepare("SELECT * FROM bookings WHERE date = ? AND staff_id = ? AND bookingstat != 'Dibatalkan' AND bookingstat != 'Cancelled'");
 $stmt->execute([$_POST['date'], $_POST['staff']]);
 
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -53,11 +54,13 @@ function timeslots($duration, $cleanup, $start, $end, $existingBookings)
 			$bookingStartTime = strtotime($booking['starttime']); // Convert booking start time to timestamp
 			$bookingEndTime = $bookingStartTime + $booking['duration'] * 60; // Calculate booking end time
 
-			// If the timeslots overlap, set overlap flag to true
-			if (
-				($currentTime >= $bookingStartTime && $currentTime < $bookingEndTime) ||
-				($endTimeSlot > $bookingStartTime && $endTimeSlot <= $bookingEndTime)
-			) {
+			// Standard interval overlap check: (start1 < end2) AND (end1 > start2)
+			// This correctly catches all overlap scenarios:
+			// 1. New slot starts during existing booking
+			// 2. New slot ends during existing booking
+			// 3. New slot completely encompasses existing booking
+			// 4. Existing booking completely encompasses new slot
+			if ($currentTime < $bookingEndTime && $endTimeSlot > $bookingStartTime) {
 				$overlap = true;
 				break;
 			}
@@ -91,7 +94,7 @@ function timeslots($duration, $cleanup, $start, $end, $existingBookings)
 	if ($selectedDate->format('N') == 2) { // Check if the day of the week is Tuesday (2)
 	?>
 		<h1 id="selectedDate" class="text-center" style="margin:20px; font-size:2rem;">Anda pilih tarikh pada
-			hari Selasa iaitu hari tutup Kapas Beauty Spa</h1> <!-- Display message for Tuesday -->
+			hari Selasa iaitu hari tutup Lunara Spa</h1> <!-- Display message for Tuesday -->
 		<div class="timeslots-container">
 			<div style="margin:1rem !important;" class='alert alert-secondary'>Tiada slot masa tempahan terbuka
 				pada hari Selasa.</div> <!-- Display message for no available slots on Tuesday -->

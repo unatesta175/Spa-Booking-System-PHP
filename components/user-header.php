@@ -18,7 +18,7 @@
       justify-content: center;">
          <div>
             <a href="index.php"><img class=" underline" style=" margin-top: 10px;
-      margin-bottom: 10px;" width="auto" height="70" src="./images/kapas-new-logo.png" alt=""></a>
+      margin-bottom: 10px;" width="auto" height="70" src="./images/lunara-new-logo.png" alt=""></a>
          </div>
 
       </div>
@@ -27,29 +27,29 @@
       <nav class="navbar flex">
          <div class="menu-item">
             <div class="dropdown-toggle-wrapper" style="display: flex; align-items: center; cursor: pointer;">
-               <a href="service-package.php" class="underline">Rawatan & Pakej</a>
+               <a href="service-package.php" class="underline">Rawatan & Terapi</a>
                <i class="fas fa-chevron-down"></i>
             </div>
             <div class="dropdown-content">
-               <a href="sv-pakej-spa.php">Pakej Spa</a>
-               <a href="sv-urutan-badan.php">Urutan Badan</a>
+               <a href="sv-pakej-terapi-badan.php">Pakej Terapi Badan</a>
+               <a href="sv-terapi-urutan.php">Terapi Urutan</a>
                <a href="sv-skrub.php">Skrub</a>
-               <a href="sv-rawatan-facial.php">Rawatan Facial</a>
-               <a href="sv-mandian.php">Mandian</a>
-               <a href="sv-sauna.php">Sauna</a>
-               <a href="sv-rawatan-kaki.php">Rawatan Kaki</a>
-               <a href="sv-waxing.php">Waxing</a>
-               <a href="sv-bekam-sunnah.php">Bekam Sunnah</a>
-               <a href="sv-rawatan-resdung.php">Rawatan Resdung</a>
-               <a href="sv-balutan-badan.php">Balutan Badan</a>
-               <a href="sv-fisioterapi.php">Fisioterapi</a>
+               <a href="sv-rawatan-muka.php">Rawatan Muka</a>
+               <a href="sv-terapi-rendaman.php">Terapi Rendaman</a>
+               <a href="sv-terapi-wap.php">Terapi Wap</a>
+               <a href="sv-terapi-kaki.php">Terapi Kaki </a>
+               <a href="sv-terapi-wax.php">Terapi Wax</a>
+               <a href="sv-terapi-bekam.php">Terapi Bekam</a>
+               <a href="sv-terapi-resdung.php">Terapi Sinus</a>
+               <a href="sv-terapi-balutan.php">Terapi Balutan</a>
+               <a href="sv-terapi-pemulihan.php">Terapi Pemulihan</a>
                <a href="sv-lain-lain.php">Lain-lain</a>
 
             </div>
          </div>
       
          <a href="shop.php" class="underline">Produk</a>
-         <a href="giftcard-shop.php" class="underline">Gift Card</a>
+      
          <a href="orders.php" class="underline">Pesanan</a>
         
          

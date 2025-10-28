@@ -53,7 +53,7 @@ include 'components/wishlist_cart.php';
 
                      <h3>Skrub</h3>
                      <br>
-                     <span>Rutin kecantikan Mesir sejak zaman dulu lagi untuk membuang sel-sel kulit mati dan kotoran daripada lapisan kulit anda. Skrub membantu memberi lapisan kelembapan kulit dan lapisan minyak badan baharu dan bersih.</span>
+                     <span>Nikmati pengalaman penyingkiran lapisan kulit kusam secara lembut dengan rawatan lulur kami. Kulit anda akan terasa lebih lembut, bersih dan bercahaya dengan kelembapan yang diperbaharui.</span>
                      <br>
                      <a href="#main" class="btn">Lihat Pakej Sedia Ada</a>
                      <br>

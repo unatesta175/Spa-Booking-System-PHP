@@ -500,7 +500,7 @@ echo $paymentScript; ?>
                                  // curl_close($curl);
                                  // $obj = json_decode($result,true);
                                  // $billcode=$obj[0]['BillCode'];4
-                                 // $eventTitle = "Sesi Rawatan " . $servicename . " di Kapas Spa Beauty";
+                                 // $eventTitle = "Sesi Rawatan " . $servicename . " di Lunara Spa";
                                  // $details = "sila isi catatan anda";
                                  // $location ="https://www.google.com/maps/place//data=!4m2!3m1!1s0x31cc4c118980e0e3:0x9fda70bc6b87e680?source=g.page.share";
                                  //  $gcal = "https://calendar.google.com/calendar/u/0/r/eventedit?text=" . $eventTitle  . "&dates=" . $date . "T" . $starttime . "/" . $date . "T" . $endtime . "&details=" . $details . "&location=" . $location . "&sf=true&output=xml";
@@ -515,9 +515,9 @@ echo $paymentScript; ?>
                                  $starttime = $startDateTime->format('His'); // Get the start time part in HHMMSS format
                                  $endtime = $endDateTime->format('His'); // Get the end time part in HHMMSS format
 
-                                 $eventTitle = urlencode("Sesi Rawatan " . $servicename . " di Kapas Spa Beauty");
+                                 $eventTitle = urlencode("Sesi Rawatan " . $servicename . " di Lunara Spa");
                                  $details = urlencode("Event Details");
-                                 $location = urlencode("A-1, 07, Jalan SS 6/5a, Dataran Glomac, 47301 Petaling Jaya, Selangor");
+                                 $location = urlencode("No.108 , Jalan TH 13/7v, Dewan Hurraima, 47301 Shah Alam, Selangor");
 
                                  // Build the Google Calendar URL
                                  $gcal = "https://calendar.google.com/calendar/u/0/r/eventedit?text=" . $eventTitle  . "&dates=" . $dates . "T" . $starttime . "/" . $dates . "T" . $endtime . "&details=" . $details . "&location=" . $location . "&sf=true&output=xml";
