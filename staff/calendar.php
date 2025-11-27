@@ -161,7 +161,7 @@ if (!isset($staff_id)) {
 
             events: [
                <?php
-           $bookings_query = $conn->prepare("SELECT * FROM `bookings` WHERE staff_id =?");
+           $bookings_query = $conn->prepare("SELECT * FROM `bookings` WHERE staff_id =? AND bookingstat != 'Batal'");
                $bookings_query->execute([$staff_id]);
                while ($booking = $bookings_query->fetch(PDO::FETCH_ASSOC)) {
                   $start_datetime = $booking['date'] . 'T' . $booking['starttime'];

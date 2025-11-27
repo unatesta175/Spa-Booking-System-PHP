@@ -366,7 +366,7 @@ if (isset($_SESSION['user_id'])) {
 
                 </div>
                 <div class="container mt-3">
-                    <a href="record.php" class="btns btn-secondary"><i class="fas fa-arrow-left"></i>Kembali ke
+                    <a href="booking-record.php" class="btns btn-secondary"><i class="fas fa-arrow-left"></i>Kembali ke
                         Pakej</a>
                 </div>
             </div>

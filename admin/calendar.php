@@ -161,7 +161,7 @@ if (!isset($admin_id)) {
 
             events: [
                <?php
-               $bookings_query = $conn->prepare("SELECT * FROM `bookings`");
+               $bookings_query = $conn->prepare("SELECT * FROM `bookings` WHERE bookingstat != 'Batal'");
                $bookings_query->execute();
                while ($booking = $bookings_query->fetch(PDO::FETCH_ASSOC)) {
                   $start_datetime = $booking['date'] . 'T' . $booking['starttime'];

@@ -6,6 +6,7 @@ include 'components/connect.php';
 // ToyyibPay will POST payment status to this URL
 
 // Get POST data from ToyyibPay
+//test data http://localhost/lunaraspa.com/payment-success.php?booking_id=KB00000070&status_id=1&billcode=iuuyzjxq
 $refno = isset($_POST['refno']) ? $_POST['refno'] : '';
 $status = isset($_POST['status']) ? $_POST['status'] : '';
 $reason = isset($_POST['reason']) ? $_POST['reason'] : '';

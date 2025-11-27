@@ -162,7 +162,7 @@ include 'components/wishlist_cart.php';
 
             events: [
                <?php
-               $bookings_query = $conn->prepare("SELECT * FROM `bookings` WHERE client_id=?");
+               $bookings_query = $conn->prepare("SELECT * FROM `bookings` WHERE client_id=? AND bookingstat != 'Batal'");
                $bookings_query->execute([$user_id]);
                while ($booking = $bookings_query->fetch(PDO::FETCH_ASSOC)) {
                   $start_datetime = $booking['date'] . 'T' . $booking['starttime'];

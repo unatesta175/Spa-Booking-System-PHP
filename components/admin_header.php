@@ -22,8 +22,7 @@
          <a href="../admin/booking-record.php">tempahan</a>
          <a href="../admin/services.php">rawatan</a>
          <a href="../admin/products.php">produk</a>
-         <a href="../admin/giftcards.php">giftcard</a>
-         <a href="../admin/credits.php">credit</a>
+   
          <a href="../admin/placed-orders.php">orders</a>
          <a href="../admin/admin-accounts.php">admin</a>
          <a href="../admin/client-accounts.php">pengguna</a>
