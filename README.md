@@ -18,6 +18,8 @@
 
 [Demo](#-screenshots) • [Features](#-features) • [Installation](#-installation) • [Documentation](#-documentation)
 
+🎥 **Video Walkthrough:** https://youtu.be/nQmUlLfFkL4
+
 </div>
 
 ---
